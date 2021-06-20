@@ -16,7 +16,6 @@ const oldPointStructure = {
 
 function oldScrabbleScorer(word) {
   word = "word";
- 
   word = word.toUpperCase(); 
   
   let letterPoints = "";
@@ -39,11 +38,9 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   console.log("Let's play Scrabble!");
-  word = input.question("Enter a word to score: ");
+   word = input.question("Let's play Scrabble! \n Enter a word to score: ");
+   console.log(word);
    
-   return word;
-    
 };
 
  
@@ -51,8 +48,7 @@ function initialPrompt() {
  let simpleScore = 0;
  
 function simpleScoreFun(word) {
-  word = "word";
-
+word = "word";
 //make word case insensative
 word = word.toLowerCase(); 
 
@@ -69,29 +65,31 @@ word = word.toLowerCase();
 let standardScore = 0;
 let vowelBonusScore = 0;
 let bonusTally = 0;
-const vowelBonus = ['a', 'e', 'i', 'o', 'u'];
+const vowelBonus = ['A', 'E', 'I', 'O', 'U'];
 
 
 function vowelBonusFun(word) {
-  word = "word";
-  word = word.toLowerCase(); 
+ word = "area";
+  word = word.toUpperCase(); 
 
 for (let i = 0; i < word.length; i++) {
  
- 
  //if vowel
 
- if (word[i] === 'a','e','i','o','u'){
-bonusTally +=1;
+
+ if (word[i] === vowelBonus[0] || word[i] === vowelBonus[1] || word[i] === vowelBonus[2]|| word[i] === vowelBonus[3] || word[i] === vowelBonus[4]) {
+bonusTally = bonusTally + 1;
 
 }else{
  //if constanant
- standardScore +=1;
+ standardScore = standardScore + 1;
 }
 
+ 
 }
-bonusTally = (bonusTally * 3);
-vowelBonusScore = (standardScore + bonusTally);
+
+let bonuses = (bonusTally * 3);
+vowelBonusScore = (standardScore + bonuses);
 console.log("Word", word, "'s vowel bonus score is: ", vowelBonusScore);
 return vowelBonusScore;
 
