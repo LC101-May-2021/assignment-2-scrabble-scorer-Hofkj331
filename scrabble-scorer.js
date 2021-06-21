@@ -1,4 +1,6 @@
 // inspired by https://exercism.io/tracks/javascript/exercises/etl/solutions/91f99a3cca9548cebe5975d7ebca6a85
+//TODO: Figure out function returns and calling
+//TODO: case insensative
 
 const input = require("readline-sync");
 
@@ -14,20 +16,18 @@ const oldPointStructure = {
 
 
 
-function oldScrabbleScorer(word) {
-  word = initialPrompt(word);
-  //word = "word";
+function oldScrabbleScorer() {
+  word = "word";  
   word = word.toUpperCase(); 
   let letterPoints = "";
  for (let i = 0; i < word.length; i++) {
  	  for (const pointValue in oldPointStructure) {
  		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-		 }
+			letterPoints += `Points for '${word[i]}': ${parseInt(pointValue)}\n`
+      }
 	  }
   }
-   console.log(letterPoints);
-	return letterPoints;
+   return letterPoints;
  }
 
 // your job is to finish writing these functions and variables that we've named //
@@ -35,27 +35,27 @@ function oldScrabbleScorer(word) {
 
 function initialPrompt() {
   let wordInput = input.question("Let's play Scrabble! \n Enter a word to score: ");
-  let word = wordInput;
-  return word;
+  return wordInput;
 };
 
- 
- 
- let simpleScore = 0;
- 
-function simpleScoreFun(word) {
-word = initialPrompt(word);
-  //word = "word";
 
-//make word case insensative
+ 
+let simpleScore = simpleScoreFun(); 
+ 
+function simpleScoreFun() {
+//TODO: make word case insensative. Right now it is lower case
+word = "word";
 word = word.toLowerCase(); 
+let simpleScored;
+let scoreInc = 0;
 
 //scoring board <simple>
   for (let i = 0; i < word.length; i++) {
-      simpleScore += 1;
+      scoreInc += 1
+      
     }
-    //simpleScore += `The word ${word} is worth ${simpleScore} points.`
-  return simpleScore;
+    simpleScored += `The word ${word} is worth ${scoreInc} points.`
+  return simpleScored;
   }
 
 //variables for vowel scorer
@@ -64,10 +64,10 @@ let vowelBonusScore = 0;
 let bonusTally = 0;
 const vowelBonus = ['A', 'E', 'I', 'O', 'U'];
 
-function vowelBonusFun(word) {
- word = initialPrompt(word);
-  //word = "word";
-
+function vowelBonusFun() {
+  
+  //TODO: case insensative
+  word = "word";
   word = word.toUpperCase(); 
 
   for (let i = 0; i < word.length; i++) {
@@ -79,7 +79,7 @@ function vowelBonusFun(word) {
       } 
     }
   let bonuses = (bonusTally * 3);
-  vowelBonusScore = (standardScore + bonuses);
+  vowelBonusScore += `Your score is ${standardScore + bonuses}`;
   return vowelBonusScore;
   }
 let scrabbleScore;
@@ -136,7 +136,7 @@ if (userSelect == "2") {
 
 let newPointStructure={};
 
-
+//TODO: 2.C.4
 function transform() {
   
   for (let keyPoints in oldPointStructure){
@@ -144,18 +144,23 @@ function transform() {
 
 for (let letterVal of oldPointStructure[keyPoints]){
 
+  letterVal = letterVal.toLowerCase();
+  keyPoints = parseInt(keyPoints);
   newPointStructure[letterVal] = keyPoints;
 
 }
 }
 console.log(newPointStructure);
+userSelect = input.question("Enter a letter  ");
+userSelect = userSelect.toLowerCase();
+console.log(`${userSelect} is worth ${newPointStructure[userSelect]} points `);
 };
 
 
 
 function runProgram() {
-   //initialPrompt();
-   //scorerPrompt();
+   initialPrompt();
+   scorerPrompt();
    transform();
    
 }
